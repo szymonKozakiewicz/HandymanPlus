@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HandymanPlus.Api/HandymanPlus.Api.csproj" />
+    <Project Path="src/HandymanPlus.Application/HandymanPlus.Application.csproj" />
+    <Project Path="src/HandymanPlus.Domain/HandymanPlus.Domain.csproj" />
+    <Project Path="src/HandymanPlus.Infrastructure/HandymanPlus.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/HandymanPlus.Api.IntegrationTests/HandymanPlus.Api.IntegrationTests.csproj" />
+    <Project Path="tests/HandymanPlus.Api.UnitTests/HandymanPlus.Api.UnitTests.csproj" />
+    <Project Path="tests/HandymanPlus.Application.UnitTests/HandymanPlus.Application.UnitTests.csproj" />
+  </Folder>
+</Solution>
