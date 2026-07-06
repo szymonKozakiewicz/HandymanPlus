@@ -1,0 +1,12 @@
+.plus{
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo{
+    height: 1.5rem;
+    font-size: 1.3rem;
+
+}

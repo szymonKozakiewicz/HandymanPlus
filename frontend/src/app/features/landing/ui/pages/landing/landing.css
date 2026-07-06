@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* W v4 po prostu piszesz klasę pod spodem, bez żadnych @layer! */
+.search-div {
+    @apply bg-[var(--mat-sys-surface-container)] w-[40rem] h-30 rounded-lg flex items-center justify-between px-5;
+}

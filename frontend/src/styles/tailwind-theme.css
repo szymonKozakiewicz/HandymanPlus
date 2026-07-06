@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@theme {
+  
+  --color-primary: var(--mat-sys-primary);
+  --color-primary-hover: var(--mat-sys-primary-state-hover);
+  --color-primary-focus: var(--mat-sys-primary-state-focus);
+  --color-on-primary: var(--mat-sys-on-primary);
+
+  
+  --color-secondary: var(--mat-sys-secondary);
+  --color-secondary-hover: var(--mat-sys-secondary-state-hover);
+  --color-secondary-focus: var(--mat-sys-secondary-state-focus);
+  --color-on-secondary: var(--mat-sys-on-secondary);
+  
+  
+  --color-secondary-container: var(--mat-sys-secondary-container);
+  --color-on-secondary-container: var(--mat-sys-on-secondary-container);
+
+  --color-primary-container: var(--mat-sys-primary-container);
+  --color-on-primary-container: var(--mat-sys-on-primary-container);
+  
+  --color-surface: var(--mat-sys-surface);
+  --color-surface-container: var(--mat-sys-surface-container);
+  --color-surface-container-low: var(--mat-sys-surface-container-low);
+  --color-surface-container-high: var(--mat-sys-surface-container-high);
+  --color-on-surface: var(--mat-sys-on-surface);
+
+
+  --color-surface-variant: var(--mat-sys-surface-variant);
+  --color-on-surface-variant: var(--mat-sys-on-surface-variant);
+  
+  --radius-mat-sm: var(--mat-sys-corner-small);
+  --radius-mat-md: var(--mat-sys-corner-medium);
+  --radius-mat-lg: var(--mat-sys-corner-large);
+}
