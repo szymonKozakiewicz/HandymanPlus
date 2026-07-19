@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.form-container{
+    @apply bg-[var(--mat-sys-surface-container)] 
+     xl:w-[25%] w-[100%] sm:w-[80%] md:w-[70%] lg:w-[50%] rounded-[2rem]
+    flex flex-col items-center
+    p-[2.5rem] py-[4rem] justify-center;
+}
+
+.divider{
+    @apply h-[1px] grow-1 bg-[var(--mat-sys-on-surface)];
+}

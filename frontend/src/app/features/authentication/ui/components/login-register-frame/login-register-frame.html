@@ -1,0 +1,17 @@
+
+<div class="flex flex-col justify-top h-screen items-center">
+    <logo class="mb-4"></logo>
+    <div class="form-container"  >
+        <button (click)="onSwitchModeButtonClicked()" class="w-full" matButton="elevated">{{switchModeButtonText()}}</button>
+        <div class="flex w-full items-center">
+            <div class="divider"></div>  
+            <div class="mx-2 my-5">OR</div>  
+            <div class="divider"></div>  
+        </div>
+        <ng-content />
+        <button (click)="onMainActionButtonClicked()" class="w-full" matButton="filled">{{mainActionButtonText()}}</button>
+        <button (click)="onBackToLandingClicked()" class="w-full mt-4" matButton="outlined">Back</button>
+    </div>
+
+
+</div>

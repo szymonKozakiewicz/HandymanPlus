@@ -1,0 +1,43 @@
+<login-register-frame 
+mainActionButtonText="Register" 
+switchModeButtonText="Login"
+(switchModeButtonClicked)="onSwitchToLoginPageButtonClicked()"
+(mainActionButtonClicked)="onRegisterButtonClicked()">
+
+        <mat-form-field class="w-full">
+            <mat-label>Login</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Repeat password</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+            <mat-label>User type</mat-label>
+            <mat-select [formField]="registerForm.userType">
+                @for (userType of userTypes; track userType.value) {
+                <mat-option [value]="userType.value">{{userType.value}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        @if(isHandyman())
+        {
+            <mat-form-field class="w-full" >
+                <mat-label>Handyman type</mat-label>
+                <mat-select >
+                    @for (handymanType of handymanTypes; track handymanType) {
+                    <mat-option [value]="handymanType">{{handymanType}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        }
+
+
+        
+
+</login-register-frame>

@@ -1,0 +1,15 @@
+<login-register-frame 
+mainActionButtonText="Login" 
+switchModeButtonText="Register"
+(switchModeButtonClicked)="onSwitchToRegisterPageButtonClicked()"
+(mainActionButtonClicked)="onLoginButtonClicked()">
+        <mat-form-field class="w-full">
+            <mat-label>Login</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput>
+        </mat-form-field>
+</login-register-frame>

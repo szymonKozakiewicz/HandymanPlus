@@ -1,0 +1,1 @@
+export const HANDYMAN_TYPES = ['Smith', 'Plumber', 'Electrician', 'Painter'] as const;
