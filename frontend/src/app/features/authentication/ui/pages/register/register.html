@@ -4,20 +4,25 @@ switchModeButtonText="Login"
 (switchModeButtonClicked)="onSwitchToLoginPageButtonClicked()"
 (mainActionButtonClicked)="onRegisterButtonClicked()">
 
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full mb-1">
             <mat-label>Login</mat-label>
-            <input matInput>
+            <input [formField]="registerForm.login" matInput>
+            <mat-error>{{loginError()}}</mat-error>
+            
+            
         </mat-form-field>
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full mb-1">
             <mat-label>Password</mat-label>
-            <input matInput>
+            <input type="password" [formField]="registerForm.password" matInput>
+            <mat-error>{{passwordError()}}</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full mb-1">
             <mat-label>Repeat password</mat-label>
-            <input matInput>
+            <input type="password" [formField]="registerForm.repeatPassword" matInput>
+            <mat-error>{{passwordRepeatError()}}</mat-error>
         </mat-form-field>
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full mb-1">
             <mat-label>User type</mat-label>
             <mat-select [formField]="registerForm.userType">
                 @for (userType of userTypes; track userType.value) {
@@ -29,7 +34,7 @@ switchModeButtonText="Login"
         {
             <mat-form-field class="w-full" >
                 <mat-label>Handyman type</mat-label>
-                <mat-select >
+                <mat-select [formField]="registerForm.handymanType" >
                     @for (handymanType of handymanTypes; track handymanType) {
                     <mat-option [value]="handymanType">{{handymanType}}</mat-option>
                     }
