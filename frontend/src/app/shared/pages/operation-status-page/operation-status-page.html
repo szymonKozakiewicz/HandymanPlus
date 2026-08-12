@@ -1,0 +1,15 @@
+<div class="flex items-center flex-col">
+    <logo class="mb-4"></logo>
+    <div class="status-container">
+        @if(operationStatus()===OperationStatus.IN_PROGRESS)
+        {
+            <mat-spinner [diameter]="40"></mat-spinner>
+            
+        }
+        <h2 class="mt-5">{{message}}</h2>
+
+        @if (operationStatus()!==OperationStatus.IN_PROGRESS) {
+            <button matButton="tonal">Back</button>
+        }
+    </div>
+</div>

@@ -5,8 +5,8 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { LoginRegisterFrame } from '../../components/login-register-frame/login-register-frame';
 import { Router } from '@angular/router';
-import { LoginFormData } from '../../../domain/form-interfaces/login';
 import { form, required, FormField } from '@angular/forms/signals';
+import { LoginFormData } from '../../../models/form-interfaces/login';
 
 @Component({
   selector: 'login',

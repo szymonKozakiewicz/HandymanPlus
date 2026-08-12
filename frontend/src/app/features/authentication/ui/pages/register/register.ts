@@ -9,8 +9,8 @@ import { HANDYMAN_TYPES } from '../../../../../core/constants/handyman-types';
 import { ReactiveFormsModule } from '@angular/forms';
 import { form, FormField, required, SchemaPath, validate } from '@angular/forms/signals';
 import { UserTypes } from '../../../../../core/enums/user-type';
-import { RegisterFormData } from '../../../domain/form-interfaces/register';
 import { Q } from '@angular/cdk/keycodes';
+import { RegisterFormData } from '../../../models/form-interfaces/register';
 
 @Component({
   selector: 'register',
@@ -99,8 +99,8 @@ export class Register {
 
   onRegisterButtonClicked()
   {
-      console.log("REGISTER!")
       
+      this.router.navigate(['operation-status'])
   }
 
   onSwitchToLoginPageButtonClicked()
