@@ -32,4 +32,7 @@
   --radius-mat-sm: var(--mat-sys-corner-small);
   --radius-mat-md: var(--mat-sys-corner-medium);
   --radius-mat-lg: var(--mat-sys-corner-large);
+
+  --color-error: var(--mat-sys-error);
+  --color-on-error: var(--mat-sys-on-error);
 }

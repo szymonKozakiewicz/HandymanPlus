@@ -13,7 +13,7 @@ import { OperationStatus } from "../../../core/enums/operation-status";
 @Injectable({
   providedIn: 'root',
 })
-class RegisterUseCase
+export class RegisterUseCase
 {
     private readonly registerApi=inject(RegisterApi);
     private readonly operationStore=inject(OperationStore);

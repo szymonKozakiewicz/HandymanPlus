@@ -6,10 +6,23 @@
             <mat-spinner [diameter]="40"></mat-spinner>
             
         }
-        <h2 class="mt-5">{{message}}</h2>
+        
+        <h1 class="mt-5 text-xl"
+         >
+         {{message()}}
+         </h1>
+
+        @if(operationStatus()===OperationStatus.SUCCESS)
+        {
+            <mat-icon class="mt-5  status-icon" fontIcon="check"></mat-icon>
+        }
+        @if (operationStatus()===OperationStatus.FAIL) 
+        {
+            <mat-icon  class="mt-5 status-icon text-primary"  fontIcon="sentiment_very_dissatisfied"></mat-icon>
+        }
 
         @if (operationStatus()!==OperationStatus.IN_PROGRESS) {
-            <button matButton="tonal">Back</button>
+            <button matButton="tonal" class="mt-5">Back</button>
         }
     </div>
 </div>

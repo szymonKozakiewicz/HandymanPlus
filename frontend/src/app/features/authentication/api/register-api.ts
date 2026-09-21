@@ -14,7 +14,7 @@ export class RegisterApi
 
     register(registerDTO:RegisterRequest):Observable<void>
     {
-        let registerObservable=this.httpClient.post<void>(AUTH_API_ENDPOINTS.register,registerDTO)
+        let registerObservable=this.httpClient.post<void>(AUTH_API_ENDPOINTS.registerUser,registerDTO)
         return registerObservable;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, computed, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { LoginRegisterFrame } from '../../components/login-register-frame/login-register-frame';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -11,6 +11,8 @@ import { form, FormField, required, SchemaPath, validate } from '@angular/forms/
 import { UserTypes } from '../../../../../core/enums/user-type';
 import { Q } from '@angular/cdk/keycodes';
 import { RegisterFormData } from '../../../models/form-interfaces/register';
+import { RegisterUseCase } from '../../../use-case/register';
+import { RegisterRequest } from '../../../api/dto/register-request';
 
 @Component({
   selector: 'register',
@@ -28,6 +30,7 @@ export class Register {
 
 
   handymanTypes=HANDYMAN_TYPES;
+  registerUserUseCase=inject(RegisterUseCase)
 
   userTypes=[
     {value:UserTypes.client},
@@ -99,8 +102,11 @@ export class Register {
 
   onRegisterButtonClicked()
   {
-      
-      this.router.navigate(['operation-status'])
+    let modelData:RegisterFormData=this.formModel();
+    let request=new RegisterRequest(modelData);
+    this.registerUserUseCase.execute(request);
+    this.router.navigate(['operation-status'])
+
   }
 
   onSwitchToLoginPageButtonClicked()

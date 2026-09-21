@@ -5,3 +5,10 @@
     flex flex-col items-center
     p-[2.5rem] py-[4rem] justify-center h-[20rem];
 }
+
+.status-icon{
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    color: var(--mat-sys-primary)
+}
