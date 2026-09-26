@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 public class UserManagerProxy:IUserManagerProxy
 {
@@ -16,6 +17,12 @@ public class UserManagerProxy:IUserManagerProxy
         var operationResult=await this._userManager.CreateAsync(newUser,registerUserCommand.Password);
         return operationResult.Succeeded?OperationResult.SUCCESS:OperationResult.FAILURE;
 
+    }
+
+    public async Task<bool> UserByLoginExistsAsync(String login)
+    {
+        var result=await this._userManager.Users.AnyAsync(a=>a.UserName==login);
+        return result;
     }
     
 }

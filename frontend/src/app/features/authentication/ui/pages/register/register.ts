@@ -7,12 +7,15 @@ import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { HANDYMAN_TYPES } from '../../../../../core/constants/handyman-types';
 import { ReactiveFormsModule } from '@angular/forms';
-import { form, FormField, required, SchemaPath, validate } from '@angular/forms/signals';
+import { debounce, form, FormField, minLength, required, SchemaPath, SchemaPathTree, validate, validateHttp } from '@angular/forms/signals';
 import { UserTypes } from '../../../../../core/enums/user-type';
 import { Q } from '@angular/cdk/keycodes';
 import { RegisterFormData } from '../../../models/form-interfaces/register';
 import { RegisterUseCase } from '../../../use-case/register';
 import { RegisterRequest } from '../../../api/dto/register-request';
+import { LoginCheckResponse } from '../../../api/dto/login-check-response';
+import { AUTH_API_ENDPOINTS } from '../../../config/auth-api-endpoints';
+
 
 @Component({
   selector: 'register',
@@ -48,20 +51,22 @@ export class Register {
 
     }
   );
+  
 
   registerForm=form(this.formModel,
     (schemaPath)=>{
-      validate(schemaPath.repeatPassword,({value,valueOf})=>{
-        if(value()!== valueOf(schemaPath.password))
-        {
-          return {
-            kind: 'passwordMismatch',
-            message: 'Passwords do not match',
-          }
-        }
-        return null
-      });
+      validate(schemaPath.repeatPassword,this.validateIsRepeatPasswordSameAsPassword(schemaPath));
+
       required(schemaPath.login,{message:"login is required"});
+      debounce(schemaPath.login,400);
+      validateHttp(schemaPath.login,{
+        request:this.createLoginCheckRequest(),
+        onError:this.handleLoginCheckExistanceError,
+        onSuccess:this.handleSuccessCheckExistanceError
+        
+      })
+      
+
       required(schemaPath.userType,{message:"userType is required"});
       required(schemaPath.password,{message:"password is required"});
       required(schemaPath.repeatPassword,{message:"field is required"});
@@ -97,6 +102,60 @@ export class Register {
       return inputToUpdate.errors()[0]?.message || "something is wrong";
     }
     return ""
+  }
+
+  validateIsRepeatPasswordSameAsPassword(schema:SchemaPathTree<RegisterFormData>)
+  {
+    return(
+      {value,
+        valueOf,
+      }:{value:()=>string,
+        valueOf:(path:SchemaPath<string>)=>string
+      }
+    )=>
+    {
+        if(value()!== valueOf(schema.password))
+        {
+          return {
+            kind: 'passwordMismatch',
+            message: 'Passwords do not match',
+          }
+        }
+        return null
+    }
+  }
+
+  createLoginCheckRequest()
+  {
+    return ({value}:{value:()=>string})=>{
+      if(!(value()))
+      {
+        return undefined;
+      }
+      return AUTH_API_ENDPOINTS.loginCheckValidation+"?login="+encodeURIComponent(value());
+    }
+  }
+
+  handleLoginCheckExistanceError(error:unknown)
+  {
+    return{
+      kind:"serverError",
+      message:"Sorry, server not respoding"
+    }
+  }
+
+  handleSuccessCheckExistanceError(response:LoginCheckResponse)
+  {
+    if(response.isLoginAvaiable)
+    {
+      return null;
+    }
+    else{
+      return{
+        kind:"badLogin",
+        message:"this login name is already taken"
+      }
+    }
   }
 
 

@@ -22,7 +22,7 @@
         }
 
         @if (operationStatus()!==OperationStatus.IN_PROGRESS) {
-            <button matButton="tonal" class="mt-5">Back</button>
+            <button matButton="tonal" (click)="OnBtnBackClicked()" class="mt-5">Back</button>
         }
     </div>
 </div>

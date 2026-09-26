@@ -1,4 +1,5 @@
 
 export const AUTH_API_ENDPOINTS={
-    registerUser:"/api/registerUser"
+    registerUser:"/api/register/registerUser",
+    loginCheckValidation: "/api/register/loginCheck"
 }

@@ -6,7 +6,9 @@ public static class RegisterEndpoints
 {
     public static IEndpointRouteBuilder MapRegisterEndpoints(this IEndpointRouteBuilder builder)
     {
-        builder.MapPost("/api/registerUser",RegisterUser);
+        var group=builder.MapGroup("/api/register");
+        group.MapPost("/registerUser",RegisterUser);
+        group.MapGet("/loginCheck",IsLoginAvailable);
         return builder;
         
     }
@@ -17,6 +19,13 @@ public static class RegisterEndpoints
         return result==OperationResult.SUCCESS?Results.Ok():Results.BadRequest();
         
         
+    }
+
+    private static async Task<IResult> IsLoginAvailable(ISender sender,string login)
+    {
+        var query=new IsLoginAvailableQuery(login);
+        var result=await sender.Send(query);
+        return Results.Ok(result);
     }
 
 }

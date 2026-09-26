@@ -21,12 +21,13 @@ export class RegisterUseCase
 
     execute(registerDTO:RegisterRequest)
     {
-        this.operationStore.updateCurrentMessage(OPERATION_MESSAGES.PROCESSING);
+        this.updateOperationStatusStore();
 
         let observableRegister=this.sendRequest(registerDTO);
 
         this.handleResponse(observableRegister);
     }
+
 
 
     private handleResponse(observableRegister: Observable<void>) {
@@ -40,6 +41,13 @@ export class RegisterUseCase
                     this.operationStore.updateStatus(OperationStatus.FAIL);
             }
         });
+    }
+
+
+
+    private updateOperationStatusStore() {
+        this.operationStore.updateCurrentMessage(OPERATION_MESSAGES.PROCESSING);
+        this.operationStore.updateDestinationOfBtnBack("login");
     }
 
     private sendRequest(registerDTO: RegisterRequest) {

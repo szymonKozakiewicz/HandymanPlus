@@ -8,6 +8,7 @@ export class OperationStore {
 
   private readonly status=signal<OperationStatus>(OperationStatus.IN_PROGRESS);
   private readonly _message=signal<string>("Processing")
+  public destinationOfBack:string="";
   
   message=this._message.asReadonly();
   operationStatus=this.status.asReadonly();
@@ -20,6 +21,11 @@ export class OperationStore {
   updateCurrentMessage(newMessage:string)
   {
     this._message.set(newMessage);
+  }
+
+  updateDestinationOfBtnBack(newDestination:string)
+  {
+    this.destinationOfBack=newDestination;
   }
 
   
