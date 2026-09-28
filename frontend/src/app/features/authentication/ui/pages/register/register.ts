@@ -7,7 +7,7 @@ import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { HANDYMAN_TYPES } from '../../../../../core/constants/handyman-types';
 import { ReactiveFormsModule } from '@angular/forms';
-import { debounce, form, FormField, minLength, required, SchemaPath, SchemaPathTree, validate, validateHttp } from '@angular/forms/signals';
+import { debounce, form, FormField, minLength, required, SchemaPath, SchemaPathTree, submit, validate, validateHttp } from '@angular/forms/signals';
 import { UserTypes } from '../../../../../core/enums/user-type';
 import { Q } from '@angular/cdk/keycodes';
 import { RegisterFormData } from '../../../models/form-interfaces/register';
@@ -35,6 +35,7 @@ export class Register {
   handymanTypes=HANDYMAN_TYPES;
   registerUserUseCase=inject(RegisterUseCase)
 
+
   userTypes=[
     {value:UserTypes.client},
     {value:UserTypes.handyman}
@@ -58,7 +59,7 @@ export class Register {
       validate(schemaPath.repeatPassword,this.validateIsRepeatPasswordSameAsPassword(schemaPath));
 
       required(schemaPath.login,{message:"login is required"});
-      debounce(schemaPath.login,400);
+      debounce(schemaPath.login,100);
       validateHttp(schemaPath.login,{
         request:this.createLoginCheckRequest(),
         onError:this.handleLoginCheckExistanceError,
@@ -92,6 +93,10 @@ export class Register {
     
 
   )
+
+  isSubmitPossible=computed(()=>{
+    return this.registerForm().valid() && !this.registerForm().pending()
+  })
 
 
   getErrorMessageOfInput(inputToUpdate:any)
@@ -128,6 +133,7 @@ export class Register {
   createLoginCheckRequest()
   {
     return ({value}:{value:()=>string})=>{
+
       if(!(value()))
       {
         return undefined;
@@ -159,12 +165,16 @@ export class Register {
   }
 
 
-  onRegisterButtonClicked()
+  async onRegisterButtonClicked()
   {
     let modelData:RegisterFormData=this.formModel();
     let request=new RegisterRequest(modelData);
-    this.registerUserUseCase.execute(request);
-    this.router.navigate(['operation-status'])
+    await submit(this.registerForm,async ()=>{
+      this.registerUserUseCase.execute(request);
+      this.router.navigate(['operation-status'])
+    })
+
+
 
   }
 

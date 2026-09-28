@@ -13,6 +13,7 @@ export class LoginRegisterFrame {
   
   switchModeButtonText=input<string>();
   mainActionButtonText=input<string>();
+  isSubmitPossible=input<boolean>();
   switchModeButtonClicked=output<void>();
   mainActionButtonClicked=output<void>();
 

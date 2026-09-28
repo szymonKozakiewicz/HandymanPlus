@@ -9,8 +9,8 @@
             <div class="divider"></div>  
         </div>
         <ng-content />
-        <button (click)="onMainActionButtonClicked()" class="w-full" matButton="filled">{{mainActionButtonText()}}</button>
-        <button (click)="onBackToLandingClicked()" class="w-full mt-4" matButton="outlined">Back</button>
+        <button [disabled]="!isSubmitPossible()" (click)="onMainActionButtonClicked()" class="w-full" matButton="filled">{{mainActionButtonText()}}</button>
+        <button  (click)="onBackToLandingClicked()" class="w-full mt-4" matButton="outlined">Back</button>
     </div>
 
 

@@ -46,6 +46,7 @@ export class RegisterUseCase
 
 
     private updateOperationStatusStore() {
+        this.operationStore.updateStatus(OperationStatus.IN_PROGRESS);
         this.operationStore.updateCurrentMessage(OPERATION_MESSAGES.PROCESSING);
         this.operationStore.updateDestinationOfBtnBack("login");
     }
