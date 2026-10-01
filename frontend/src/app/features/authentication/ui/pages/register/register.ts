@@ -7,7 +7,7 @@ import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { HANDYMAN_TYPES } from '../../../../../core/constants/handyman-types';
 import { ReactiveFormsModule } from '@angular/forms';
-import { debounce, form, FormField, minLength, required, SchemaPath, SchemaPathTree, submit, validate, validateHttp } from '@angular/forms/signals';
+import { debounce, form, FormField, minLength, pattern, required, SchemaPath, SchemaPathTree, submit, validate, validateHttp } from '@angular/forms/signals';
 import { UserTypes } from '../../../../../core/enums/user-type';
 import { Q } from '@angular/cdk/keycodes';
 import { RegisterFormData } from '../../../models/form-interfaces/register';
@@ -69,7 +69,13 @@ export class Register {
       
 
       required(schemaPath.userType,{message:"userType is required"});
+
       required(schemaPath.password,{message:"password is required"});
+      minLength(schemaPath.password,6, {message:"password need to have more than 6 characters"})
+      pattern(schemaPath.password,/^.*[A-Z].*$/,{message:"password need to have at least one capital letter"})
+      pattern(schemaPath.password,/^.*[a-z].*$/,{message:"password need to have at least one small letter"})
+      pattern(schemaPath.password,/^.*[^a-zA-Z0-9].*$/,{message:"password need to have at least one non alphanumeric character"})
+
       required(schemaPath.repeatPassword,{message:"field is required"});
 
     }
