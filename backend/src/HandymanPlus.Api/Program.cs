@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using HandymanPlus.Api.Features.Authentication.Endpoints;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserCommand>();
 builder.Services.AddDbContext<HandymanDbContext>(
     options =>
     {

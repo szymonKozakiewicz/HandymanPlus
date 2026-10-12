@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 
 namespace HandymanPlus.Api.Features.Authentication.Endpoints;
@@ -13,8 +14,15 @@ public static class RegisterEndpoints
         
     }
 
-    private static async Task<IResult> RegisterUser(ISender sender,RegisterUserCommand registerUserCommand)
+    private static async Task<IResult> RegisterUser(ISender sender,
+    IValidator<RegisterUserCommand> validator,
+    RegisterUserCommand registerUserCommand)
     {
+        var validationResult = await validator.ValidateAsync(registerUserCommand);
+        if(!validationResult.IsValid)
+        {
+            return Results.BadRequest("Validation didn't pass");
+        }
         OperationResult result=await sender.Send(registerUserCommand);
         return result==OperationResult.SUCCESS?Results.Ok():Results.BadRequest();
         
